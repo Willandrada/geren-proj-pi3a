@@ -169,7 +169,8 @@ public class NewJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-
+        Cadastro cadastro = new Cadastro(null, true);
+        cadastro.setVisible(true);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

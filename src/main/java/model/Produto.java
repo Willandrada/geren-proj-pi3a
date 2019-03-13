@@ -5,11 +5,21 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author Johnathan
  */
 public class Produto {
+
+    public Date getDtCadastro() {
+        return dtCadastro;
+    }
+
+    public void setDtCadastro(Date dtCadastro) {
+        this.dtCadastro = dtCadastro;
+    }
 
     private int idProduto;
     private String nome;
@@ -17,23 +27,23 @@ public class Produto {
     private float precoCompra;
     private float precoVenda;
     private int quantidade;
-    private boolean status;
+    private boolean disponivel;
+    private Date dtCadastro;
 
-    public Produto()
-    {
-        
+    public Produto() {
+
     }
-    
-    public Produto(String nome, String descricao, float precoCompra, float precoVenda, int quantidade, boolean status)
-    {
-     this.nome = nome;
-     this.descricao = descricao;
-     this.precoCompra = precoCompra;
-     this.precoVenda = precoVenda;
-     this.quantidade = quantidade;
-     this.status = status;
+
+    public Produto(String nome, String descricao, float precoCompra, float precoVenda, int quantidade, boolean disponivel, Date dtCadastro) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.precoCompra = precoCompra;
+        this.precoVenda = precoVenda;
+        this.quantidade = quantidade;
+        this.disponivel = disponivel;
+        this.dtCadastro = dtCadastro;
     }
-    
+
     public int getIdProduto() {
         return idProduto;
     }
@@ -82,11 +92,11 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isDisponivel() {
+        return disponivel;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
     }
 }

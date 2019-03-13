@@ -6,6 +6,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class ProdutoDAO {
             url = "jdbc:mysql://localhost:3306/" + "geren";
             conexao = DriverManager.getConnection(url, "root", "");
 
-            PreparedStatement comando = conexao.prepareStatement("INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECOCOMPRA, PRECOVENDA, QUANTIDADE, STATUS)"
+            PreparedStatement comando = conexao.prepareStatement("INSERT INTO PRODUTOS (NOME, DESCRICAO, PRECOCOMPRA, PRECOVENDA, QUANTIDADE, DISPONIVEL, DTCADASTRO)"
                     + " VALUES(?,?,?,?,?,?);");
 
             comando.setString(1, produto.getNome());
@@ -44,7 +45,8 @@ public class ProdutoDAO {
             comando.setFloat(3, produto.getPrecoCompra());
             comando.setFloat(4, produto.getPrecoVenda());
             comando.setInt(5, produto.getQuantidade());
-            comando.setBoolean(6, produto.isStatus());
+            comando.setBoolean(6, produto.isDisponivel());
+            comando.setDate(7, (Date) produto.getDtCadastro());
 
             int linhasAfetadas = comando.executeUpdate();
 
@@ -83,7 +85,8 @@ public class ProdutoDAO {
                     + " PRECOCOMPRA ='" + produto.getPrecoCompra() + "'"
                     + " PRECOVENDA ='" + produto.getPrecoVenda() + "'"
                     + " QUANTIDADE ='" + produto.getQuantidade() + "'"
-                    + " STATUS ='" + produto.isStatus() + "'"
+                    + " DISPONIVEL ='" + produto.isDisponivel() + "'"
+                    + " DTCADASTRO ='" + produto.getDtCadastro() + "'"
                     + " WHERE IDPRODUTO =" + produto.getIdProduto()
             );
 
@@ -160,7 +163,8 @@ public class ProdutoDAO {
                 produto.setPrecoCompra(rs.getFloat("PRECOCOMPRA"));
                 produto.setPrecoVenda(rs.getFloat("PRECOVENDA"));
                 produto.setQuantidade(rs.getInt("QUANTIDADE"));
-                produto.setStatus(rs.getBoolean("STATUS"));
+                produto.setDisponivel(rs.getBoolean("DISPONIVEL"));
+                produto.setDtCadastro(rs.getDate("DTCADASTRO"));
                 listaProdutos.add(produto);
             }
 
@@ -199,7 +203,8 @@ public class ProdutoDAO {
                 produto.setPrecoCompra(rs.getFloat("PRECOCOMPRA"));
                 produto.setPrecoVenda(rs.getFloat("PRECOVENDA"));
                 produto.setQuantidade(rs.getInt("QUANTIDADE"));
-                produto.setStatus(rs.getBoolean("STATUS"));
+                produto.setDisponivel(rs.getBoolean("DISPONIVEL"));
+                produto.setDtCadastro(rs.getDate("DTCADASTRO"));
                 listaProduto.add(produto);
 
             }

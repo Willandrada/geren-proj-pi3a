@@ -6,6 +6,7 @@
 package controller;
 
 import dao.ProdutoDAO;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import model.Produto;
@@ -17,8 +18,8 @@ import model.Produto;
 public class ProdutoController {
 
     //salvar no banco de dados
-    public static boolean Salvar(String nome, String descricao, float valorCompra, float valorVenda, int quantidade, boolean status) {
-        model.Produto produto = new model.Produto(nome, descricao, valorCompra, valorVenda, quantidade, status);
+    public static boolean Salvar(String nome, String descricao, float valorCompra, float valorVenda, int quantidade, boolean disponivel, Date dtCadastro) {
+        model.Produto produto = new model.Produto(nome, descricao, valorCompra, valorVenda, quantidade, disponivel, dtCadastro);
         return ProdutoDAO.SalvarProduto(produto);
 
     }
@@ -27,8 +28,8 @@ public class ProdutoController {
         return ProdutoDAO.ExcluirProduto(indice);
     }
 
-    public static boolean Atualizar(String nome, String descricao, float valorCompra, float valorVenda, int quantidade, boolean status) {
-        model.Produto produto = new model.Produto(nome, descricao, valorCompra, valorVenda, quantidade, status);
+    public static boolean Atualizar(String nome, String descricao, float valorCompra, float valorVenda, int quantidade, boolean disponivel, Date dtCadastro) {
+        model.Produto produto = new model.Produto(nome, descricao, valorCompra, valorVenda, quantidade, disponivel, dtCadastro);
         return ProdutoDAO.AtualizarProduto(produto);
     }
 
@@ -43,7 +44,8 @@ public class ProdutoController {
                 String.valueOf(produtos.get(i).getPrecoCompra()),
                 String.valueOf(produtos.get(i).getPrecoVenda()),
                 String.valueOf(produtos.get(i).getQuantidade()),
-                String.valueOf(produtos.get(i).isStatus()),});
+                String.valueOf(produtos.get(i).isDisponivel()),
+                String.valueOf(produtos.get(i).getDtCadastro()),});
 
         }
         return listaProdutos;
@@ -53,6 +55,8 @@ public class ProdutoController {
         ArrayList<model.Produto> produto = ProdutoDAO.ConsultarProdutoNome(nome);
         ArrayList<String[]> listaProdutos = new ArrayList<>();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
         for (int i = 0; i < produto.size(); i++) {
             listaProdutos.add(new String[]{String.valueOf(produto.get(i).getIdProduto()),
                 produto.get(i).getNome(),
@@ -60,10 +64,11 @@ public class ProdutoController {
                 String.valueOf(produto.get(i).getPrecoCompra()),
                 String.valueOf(produto.get(i).getPrecoVenda()),
                 String.valueOf(produto.get(i).getQuantidade()),
-                String.valueOf(produto.get(i).isStatus()),});
+                String.valueOf(produto.get(i).isDisponivel()),
+                String.valueOf(produto.get(i).getDtCadastro())
+            });
 
         }
         return listaProdutos;
     }
-
 }
